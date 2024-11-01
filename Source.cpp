@@ -4,9 +4,9 @@ int main()
 {
 	setlocale(LC_ALL, "rus");
 
-	fraction fract_1, fract_2;
+	fraction fract_1, fract_2, fract_3;
 
-	int num, den;
+	int num, den, nod;
 
 	char user;
 
@@ -34,16 +34,24 @@ int main()
 				printf("Вторая дробь - %d/%d", fract_2.get_numerator(), fract_2.get_den());
 				break;
 			case SUMN:
-				fract_1.sumn(fract_2.get_numerator(), fract_2.get_den());
+				fract_3 = fract_1 + fract_2;
+				nod = fract_3.search_nod();
+				printf("Сумма %d/%d", fract_3.get_numerator() / nod, fract_3.get_den() / nod);
 				break;
 			case SUBTRACTION:
-				fract_1.subtraction(fract_2.get_numerator(), fract_2.get_den());
+				fract_3 = fract_1 - fract_2;
+				nod = fract_3.search_nod();
+				printf("разность %d/%d", fract_3.get_numerator() / nod, fract_3.get_den() / nod);
 				break;
 			case MULTIPLICATION:
-				fract_1.multiplication(fract_2.get_numerator(), fract_2.get_den());
+				fract_3 = fract_1 * fract_2;
+				nod = fract_3.search_nod();
+				printf("произведение %d/%d", fract_3.get_numerator() / nod, fract_3.get_den() / nod);
 				break;
 			case DIVISION:
-				fract_1.devision(fract_2.get_numerator(), fract_2.get_den());
+				fract_3 = fract_1 / fract_2;
+				nod = fract_3.search_nod();
+				printf("частное %d/%d", fract_3.get_numerator() / nod, fract_3.get_den() / nod);
 				break;
 			case EXIT:
 				break;
@@ -51,9 +59,9 @@ int main()
 			break;
 		}
 
-
 	} while (user != '0');
 
 	return 0;
 }
+
 

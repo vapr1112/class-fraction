@@ -7,30 +7,24 @@ using namespace std;
 class fraction
 {
 private:
-	int numerator;
-	int denominator;
-
-	int search_nod(int& general_num, int& general_den);
+	int numerator;//числитель
+	int denominator;//знаменатель
 
 public:
 
-	fraction()
-	{
-		numerator = 0;
-		denominator = 1;
-	}
-	fraction(int num_p, int den_p)
-	{
-		numerator = num_p;
-		denominator = den_p;
-	}
+	fraction() : fraction(0, 1){}
 
+	fraction(int num_p, int den_p) : numerator { num_p }, denominator{ den_p }{}//главный конструктор
+
+	explicit fraction(int num_p) : fraction(num_p, 1) {}
+
+	//аксессоры и модификаторы
 	void set_numerator(int numerator_p)
 	{
 		numerator = numerator_p;
 	}
 
-	int get_numerator()
+	int get_numerator()const
 	{
 		return numerator;
 	}
@@ -48,17 +42,32 @@ public:
 		}
 	}
 
-	int get_den()
+	int get_den()const
 	{
 		return denominator;
 	}
 
-	void sumn(int num_2, int den_2);
+	//другие методы
+	int search_nod();
 
-	void subtraction(int num_2, int den_2);
+	//перегрузка операторов
+	friend const fraction operator+(const fraction& obj_p, const fraction& obj_p2)
+	{
+		return fraction(obj_p.denominator * obj_p2.numerator + obj_p2.denominator * obj_p.numerator, obj_p.denominator * obj_p2.denominator);
+	}
 
+	friend const fraction operator-(const fraction& obj_p, const fraction& obj_p2)
+	{
+		return fraction(obj_p2.denominator * obj_p.numerator - obj_p.denominator * obj_p2.numerator, obj_p.denominator * obj_p2.denominator);
+	}
 
-	void multiplication(int num_2, int den_2);
+	friend const fraction operator*(const fraction& obj_p, const fraction& obj_p2)
+	{
+		return fraction(obj_p.numerator * obj_p2.numerator, obj_p.denominator * obj_p2.denominator);
+	}
 
-	void devision(int num_2, int den_2);
+	friend const fraction operator/(const fraction& obj_p, const fraction& obj_p2)
+	{
+		return fraction(obj_p.numerator * obj_p2.denominator, obj_p.denominator * obj_p2.numerator);
+	}
 };
